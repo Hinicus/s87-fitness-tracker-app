@@ -9,10 +9,12 @@ import { createPinia } from "pinia";
 import { createWebHistory, createRouter } from "vue-router";
 
 //components
+import HomePage from "./pages/HomePage.vue";
 import Register from "./pages/Register.vue";
 import Login from "./pages/Login.vue";
 import Workouts from "./pages/Workouts.vue";
 import AddWorkout from "./pages/AddWorkout.vue";
+import Logout from "./pages/Logout.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,7 +22,7 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      //component: HomePage,
+      component: HomePage,
     },
     {
       path: "/register",
@@ -33,6 +35,11 @@ const router = createRouter({
       name: "Login",
       component: Login,
       meta: { center: true },
+    },
+    {
+      path: "/logout",
+      name: "Logout",
+      component: Logout,
     },
     {
       path: "/workouts",
