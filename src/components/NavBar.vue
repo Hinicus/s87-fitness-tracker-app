@@ -50,14 +50,6 @@ console.log(user);
             <i class="bi bi-person-walking me-1"></i>
             Workouts</router-link
           >
-          <router-link
-            class="nav-link active"
-            aria-current="page"
-            to="/addWorkouts"
-            v-if="user.email && user.isAdmin">
-            <i class="bi bi-database-fill me-1"></i>
-            Add Workouts</router-link
-          >
         </div>
       </div>
     </div>
