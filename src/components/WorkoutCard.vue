@@ -1,10 +1,36 @@
 <script setup>
+import { Notyf } from "notyf";
+import api from "../api";
+import { ref } from "vue";
+
+const notyf = new Notyf();
 defineProps({
   workout: {
     type: Object,
     required: true,
   },
 });
+
+const emit = defineEmits(["deleted"]);
+const deleting = ref(false);
+
+async function deleteWorkout(id) {
+  try {
+    deleting.value = true;
+    let res = await api.delete(`/workouts/deleteWorkout/${id}`);
+    if (res.status === 200) {
+      notyf.success("Workout Deleted Successfully");
+
+      emit("deleted", id);
+    }
+  } catch (e) {
+    if (e.response?.data) {
+      notyf.error("Error! Could not delete workout");
+    }
+  } finally {
+    deleting.value = false;
+  }
+}
 </script>
 
 <template>
@@ -27,6 +53,17 @@ defineProps({
         <i class="bi bi-clock me-1"></i>Duration:
         <strong class="text-dark">{{ workout.duration }}</strong>
       </p>
+
+      <div class="ms-auto d-flex gap-2">
+        <button class="btn btn-sm btn-success">Edit</button>
+        <button
+          class="btn btn-sm btn-danger"
+          :disabled="deleting"
+          @click="deleteWorkout(workout._id)">
+          <i class="bi bi-trash me-1"></i>
+          {{ deleting ? "Deleting..." : "Delete" }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

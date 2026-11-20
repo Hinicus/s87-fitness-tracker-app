@@ -20,6 +20,10 @@ async function fetchWorkouts() {
   }
 }
 
+function removeWorkoutFromList(deletedId) {
+  workouts.value = workouts.value.filter((w) => w._id !== deletedId);
+}
+
 onMounted(fetchWorkouts);
 </script>
 
@@ -52,7 +56,7 @@ onMounted(fetchWorkouts);
         class="col"
         v-for="(workout, index) in workouts"
         :key="workout._id || index">
-        <WorkoutCard :workout="workout" />
+        <WorkoutCard :workout="workout" @deleted="removeWorkoutFromList" />
       </div>
     </div>
   </div>
