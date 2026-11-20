@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex flex-column shadow rounded p-5 w-50">
+  <div class="shadow-sm bg-light rounded-4 border p-5 w-50">
     <div class="text-center">
       <h1 class="fw-semibold">FitApp</h1>
       <h3>Login</h3>
     </div>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" class="d-flex flex-column">
       <div class="form-group mb-3">
         <label for="exampleInputEmail1">Email address</label>
         <input
@@ -25,13 +25,13 @@
       </div>
       <button
         type="submit"
-        class="btn btn-primary align-items-end"
+        class="ms-auto btn btn-primary align-items-end"
         v-if="isEnabled">
         Login
       </button>
       <button
         type="submit"
-        class="btn btn-danger align-items-end disabled"
+        class="ms-auto btn btn-danger align-items-end disabled"
         v-else>
         Login
       </button>
