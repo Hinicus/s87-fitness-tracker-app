@@ -18,10 +18,9 @@ export const useGlobalStore = defineStore("global", () => {
     }
 
     let { data } = await api.get("/users/details");
-
     user.token = token;
-    user.email = data.email;
-    user.isAdmin = data.isAdmin;
+    user.email = data.user.email;
+    user.isAdmin = data.user.isAdmin;
   }
 
   return {

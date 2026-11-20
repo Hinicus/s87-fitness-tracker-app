@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useGlobalStore } from "../stores/global";
 const { user } = useGlobalStore();
+console.log(user);
 </script>
 
 <template>
@@ -44,7 +45,7 @@ const { user } = useGlobalStore();
           <router-link
             class="nav-link active"
             aria-current="page"
-            to="/login"
+            to="/workouts"
             v-if="user.email">
             <i class="bi bi-person-walking me-1"></i>
             Workouts</router-link
@@ -52,7 +53,7 @@ const { user } = useGlobalStore();
           <router-link
             class="nav-link active"
             aria-current="page"
-            to="/login"
+            to="/addWorkouts"
             v-if="user.email && user.isAdmin">
             <i class="bi bi-database-fill me-1"></i>
             Add Workouts</router-link
