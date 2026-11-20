@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import api from "../api";
 
 export const useGlobalStore = defineStore("global", () => {
@@ -23,8 +23,17 @@ export const useGlobalStore = defineStore("global", () => {
     user.isAdmin = data.user.isAdmin;
   }
 
+  //set workout
+  let selectedWorkout = ref(null);
+
+  function setSelectedWorkout(workout) {
+    selectedWorkout.value = workout;
+  }
+
   return {
     user,
     getUserDetails,
+    selectedWorkout,
+    setSelectedWorkout,
   };
 });

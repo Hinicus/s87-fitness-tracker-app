@@ -52,6 +52,12 @@ const router = createRouter({
       component: AddWorkout,
       meta: { center: true },
     },
+    {
+      path: "/updateWorkout/:id",
+      name: "UpdateWorkout",
+      component: AddWorkout,
+      meta: { center: true },
+    },
   ],
 });
 

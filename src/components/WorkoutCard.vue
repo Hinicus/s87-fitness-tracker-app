@@ -2,9 +2,12 @@
 import { Notyf } from "notyf";
 import api from "../api";
 import { ref } from "vue";
-
+import { useRoute, useRouter } from "vue-router";
+import { useGlobalStore } from "../stores/global";
+const store = useGlobalStore();
 const notyf = new Notyf();
-defineProps({
+
+const props = defineProps({
   workout: {
     type: Object,
     required: true,
@@ -14,6 +17,8 @@ defineProps({
 const emit = defineEmits(["deleted"]);
 const deleting = ref(false);
 
+const route = useRoute();
+const router = useRouter();
 async function deleteWorkout(id) {
   try {
     deleting.value = true;
@@ -30,6 +35,11 @@ async function deleteWorkout(id) {
   } finally {
     deleting.value = false;
   }
+}
+
+async function updateWorkout(id) {
+  store.setSelectedWorkout(props.workout);
+  router.push(`/updateWorkout/${id}`);
 }
 </script>
 
@@ -55,7 +65,12 @@ async function deleteWorkout(id) {
       </p>
 
       <div class="ms-auto d-flex gap-2">
-        <button class="btn btn-sm btn-success">Edit</button>
+        <button
+          class="btn btn-sm btn-success"
+          @click="updateWorkout(workout._id)">
+          <i class="bi bi-pencil me-1"></i>
+          Edit
+        </button>
         <button
           class="btn btn-sm btn-danger"
           :disabled="deleting"
